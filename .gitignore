@@ -1,0 +1,114 @@
+# Power BI Project .gitignore
+
+# Power BI Desktop Files
+*.pbix
+*.pbip
+*.pbit
+
+# Power BI Analysis Services
+*.asdatabase
+*.database
+
+# Power BI Cache
+.Analysis Services/
+
+# Power Query / Power Pivot
+*.xlsx~
+*.xls~
+
+# Analysis Services Backup Files (if project uses them)
+*.abf
+
+# Report Builder (if used)
+*.rptproj.rsuser
+
+# Local settings
+LocalSettings.json
+settings.local.json
+
+# Cache
+.cache/
+*.cache
+
+# Temporary files
+*.tmp
+*.temp
+~*
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+*.lnk
+
+# IDE / Editor
+.vscode/
+.idea/
+*.sublime-*
+*.code-workspace
+
+# Dependencies
+node_modules/
+.npm
+package-lock.json
+
+# Logs
+*.log
+logs/
+
+# Credentials (NEVER commit)
+*.pem
+*.key
+*.pfx
+*.p12
+credentials.json
+secrets.json
+.env
+.env.local
+
+# Backup files
+*.bak
+*.backup
+*.orig
+
+# Compiled Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+
+# Data files (optional - commit cleaned data only)
+Data/cleaned/*.csv
+Data/cleaned/*.xlsx
+
+# Screenshots (optional - only include final approved versions)
+Screenshots/draft/
+Screenshots/old/
+
+# Build outputs
+dist/
+build/
+*.zip
+
+# IDE generated
+.classpath
+.project
+.settings/
+
+# Python virtual environments
+venv/
+env/
+ENV/
+
+# macOS
+.AppleDouble
+.LSOverride
+
+# Windows
+*.lnk
+ehthumbs.db
+
+# Linux
+.directory
