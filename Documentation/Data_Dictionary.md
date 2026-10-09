@@ -18,24 +18,26 @@ This document describes the expected source fields and proposed model. Validate 
 
 ## Field Definitions
 
+The examples and category lists below are illustrative descriptions from earlier project notes, not a verified inventory of the source file. Confirm all 21 headers and actual values against the CSV before using this dictionary for transformations.
+
 | Column | Data Type | Business Meaning | Example | Data Quality Notes |
 |--------|-----------|------------------|---------|-------------------|
 | **Date** | Date | Booking date | 2024-03-23 | Completeness not validated; standardized YYYY-MM-DD |
 | **Time** | Time | Booking time | 12:29:38 | Completeness not validated; HH:MM:SS format |
 | **Booking ID** | String | Unique booking identifier | CNR5884300 | Completeness not validated; triple quotes removed during ETL |
-| **Booking Status** | String | Final booking outcome | "Completed", "Cancelled by Driver", "Cancelled by Customer", "No Driver Found", "Incomplete" | Completeness not validated; 5 distinct values |
+| **Booking Status** | String | Final booking outcome | "Completed", "Cancelled by Driver", "Cancelled by Customer", "No Driver Found", "Incomplete" | Completeness and distinct count not validated; prior notes list 5 labels |
 | **Customer ID** | String | Unique customer identifier | CID1982111 | Completeness not validated; triple quotes removed during ETL |
-| **Vehicle Type** | String | Vehicle category | "Auto", "Go Mini", "Go Sedan", "Bike", "eBike", "Premier Sedan", "Uber XL" | Completeness not validated; 7 distinct values |
-| **Pickup Location** | String | Ride origin location | "Palam Vihar" | Completeness not validated; 176 unique locations |
+| **Vehicle Type** | String | Vehicle category | "Auto", "Go Mini", "Go Sedan", "Bike", "eBike", "Premier Sedan", "Uber XL" | Completeness and distinct count not validated; prior notes list 7 labels |
+| **Pickup Location** | String | Ride origin location | "Palam Vihar" | Completeness and distinct count not validated; prior notes report 176 locations |
 | **Drop Location** | String | Ride destination location | "Jhilmil" | Completeness not validated; 176 unique locations |
 | **Avg VTAT** | Decimal | Average Vehicle Time at Arrival (seconds) | 4.9 | Null pattern and meaning must be verified from source documentation |
-| **Avg CTAT** | Decimal | Average Customer Time at Arrival / Ride Duration (seconds) | 14.0 | Null for cancelled/no-driver bookings (expected) |
+| **Avg CTAT** | Decimal | Average Customer Time at Arrival / Ride Duration (seconds) | 14.0 | Null pattern and meaning must be verified from source documentation |
 | **Cancelled Rides by Customer** | Boolean | Flag: Customer cancelled | 0 or 1 | Binary flag; 0 = no, 1 = yes |
 | **Reason for cancelling by Customer** | String | Why customer cancelled | "Driver is not moving towards pickup location" | Expected null pattern; verify against source |
 | **Cancelled Rides by Driver** | Boolean | Flag: Driver cancelled | 0 or 1 | Binary flag; 0 = no, 1 = yes |
 | **Driver Cancellation Reason** | String | Why driver cancelled | "Personal & Car related issues" | Expected null pattern; verify against source |
 | **Incomplete Rides** | Boolean | Flag: Ride started but not finished | 0 or 1 | Binary flag; 0 = no, 1 = yes |
-| **Incomplete Rides Reason** | String | Why ride incomplete | "Vehicle Breakdown" | Null if ride completed |
+| **Incomplete Rides Reason** | String | Why ride incomplete | "Vehicle Breakdown" | Expected null pattern; verify against source |
 | **Booking Value** | Decimal | Transaction amount (currency) | 237 | Null for some cancelled/no-driver bookings |
 | **Ride Distance** | Decimal | Distance traveled (kilometers) | 5.73 | Null for cancelled/no-driver bookings |
 | **Driver Ratings** | Decimal | Customer's rating of driver (0-5 scale) | 4.9 | Null for incomplete/cancelled bookings (no rating given) |
