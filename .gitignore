@@ -1,9 +1,10 @@
 # Power BI Project .gitignore
 
-# Power BI Desktop Files
+# Power BI binary files
+# PBIX/PBIT files are binary deliverables; verify GitHub file-size limits before adding them.
 *.pbix
-*.pbip
 *.pbit
+# Do not ignore *.pbip: PBIP is the source-controlled Power BI Project format.
 
 # Power BI Analysis Services
 *.asdatabase
