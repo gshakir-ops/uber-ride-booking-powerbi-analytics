@@ -1,41 +1,28 @@
-# Dataset Information
+# Source Dataset Notes
 
-## Source Data for Ride-Booking Analytics
+## Current repository status
 
-### File Details
-- **Filename:** `ncr_ride_bookings.csv`
-- **Size:** ~150,000 rows, 21 columns
-- **Format:** CSV with comma delimiter, UTF-8 encoding
-- **Date Range:** January 1, 2024 - December 30, 2024
-- **Geographic Scope:** NCR (National Capital Region) - India
+The expected file is named `ncr_ride_bookings.csv` and the transformation guide assumes a booking-level CSV with fields such as booking ID, date, time, booking status, vehicle type, locations, booking value, ride distance, wait-time measures, and ratings.
 
-### Source Location
-The raw dataset should be placed in this directory before running the Power BI report.
+**The CSV is not included in this repository.** The previous documentation describes it as approximately 150,000 rows and 21 columns for the NCR region of India in 2024. Those details have not been independently verified in this review because the source file and a verifiable source URL are unavailable here.
 
-**Path:** `Data/raw/ncr_ride_bookings.csv`
+## Before using the data
 
-### Data Description
-This dataset contains ride-booking transactions from a ride-sharing platform similar to Uber/Lyft. Each row represents one booking attempt with its outcome, customer/driver information, and transaction details.
+1. Record the exact source URL, publisher, dataset version/date, and access date.
+2. Confirm attribution and whether the licence permits analysis, publication, and redistribution.
+3. Inspect the real CSV headers and data types before applying the M steps in the transformation guide.
+4. Confirm row count, unique booking IDs, date range, status categories, and missing-value patterns.
+5. Do not assume that a null rating, VTAT, CTAT, or booking value has one specific business meaning without verifying the source documentation.
+6. Do not upload identifiable or confidential records.
 
-### Important Notes
-1. **Portfolio Project:** This is an independent educational/portfolio project and is not affiliated with Uber or any specific ride-sharing company.
-2. **Privacy:** All customer and driver IDs are anonymized.
-3. **Disclaimer:** Data is for analytical demonstration purposes only.
+## Local file location
 
-### How to Obtain
-If you're viewing this repository and need the dataset:
-1. The original dataset (`ncr_ride_bookings.csv`) is not included in this repository due to size constraints
-2. Contact the repository owner for access to the dataset
-3. Alternatively, place your own similarly-structured ride-booking dataset here
+If you have a licensed copy of the source file, place it at:
 
-### Dataset Schema
-See `Documentation/Data_Dictionary.md` for complete field definitions and data types.
+`Data/raw/ncr_ride_bookings.csv`
 
-### Data Quality
-- **Completeness:** 100% complete for core transactional fields (Date, Time, Booking ID, Status, Vehicle Type, Locations)
-- **Null Values:** Present in ratings/VTAT/CTAT for cancelled rides (expected behavior)
-- **Validation:** See `Documentation/Data_Quality_Report.md` for detailed validation results
+Update the Power Query source path to match your environment. The path used in the guide is an example, not a working path on every computer.
 
----
+## Source and licensing limitation
 
-**Note:** The Power BI report expects the CSV file at the path above. Update the data source connection if placing the file elsewhere.
+A source URL and dataset redistribution terms are not currently recorded in this repository. Until these are documented, the project should not claim that the data is publicly reusable or that its derived results can be independently reproduced by a reviewer.
