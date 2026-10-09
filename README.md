@@ -2,7 +2,7 @@
 
 A portfolio project exploring how ride-booking data can be modelled and analysed for operational performance, cancellations, service quality, and revenue.
 
-> **Project status: documentation and preview available; reproducibility is incomplete.** The repository currently includes a dashboard GIF preview and implementation documentation, but it does not include the Power BI report file (.pbix or .pbip) or the source CSV. As a result, the model, visuals, DAX measures, and reported figures have not been independently validated from this repository. Please treat the numeric summaries in the findings register as provisional until they are rechecked against the source data.
+> **Project status: dataset, documentation, and preview are available; reproducibility is still incomplete.** The source CSV and dashboard GIF are present, but the editable Power BI report file (.pbix or .pbip) is not. The dataset upload is confirmed, but its contents have not been independently profiled in this review. Treat the numeric summaries in the findings register as provisional until they are recalculated from the CSV and checked against the Power BI model.
 
 This is an independent portfolio project. It is not affiliated with, endorsed by, or an official product of Uber.
 
@@ -32,11 +32,11 @@ These are analysis questions, not claims that every relationship or conclusion h
 - **Star-schema modelling** with a booking-level fact table and supporting dimensions
 - **Git/GitHub** for project documentation and version control
 
-The repository contains proposed implementation steps and measure definitions. Because the PBIX/PBIP and source CSV are not included, this README does not claim that the implementation has been run end-to-end or that all formulas have been tested in a working model.
+The repository contains proposed implementation steps and measure definitions. Although the source CSV is included, the PBIX/PBIP is not; therefore this README does not claim that the implementation has been run end-to-end or that all formulas have been tested in a working model.
 
 ## Dataset and provenance
 
-Project documents describe a file named `ncr_ride_bookings.csv`, reportedly containing around 150,000 booking records and 21 fields for the NCR region of India during 2024. The CSV is **not included** in this repository, and a verifiable source URL and redistribution licence are not currently documented here. Therefore, these dataset details should be treated as metadata inherited from the existing project notes, not as independently confirmed facts.
+The file `Data/raw/ncr_ride_bookings.csv` is now included in this repository. Existing project notes describe the dataset as approximately 150,000 booking records and 21 fields for the NCR region of India during 2024; these figures still need to be checked programmatically against the uploaded file. A commonly referenced matching dataset is [Uber Ride Analytics Dashboard — NCR Ride Bookings on Kaggle](https://www.kaggle.com/datasets/yashdevladdha/uber-ride-analytics-dashboard), but confirm that this is the actual source of the file committed here before attributing it. Public availability does not automatically grant redistribution rights; review the source dataset's terms before sharing it further.
 
 Before publishing validated findings, add the exact source URL, attribution, licence/usage terms, and a documented version of the dataset that you are permitted to redistribute. If the data cannot legally be shared, document how reviewers can obtain it and provide a safe, reproducible alternative where possible. Do not commit personal or confidential data.
 
@@ -61,7 +61,8 @@ Before publishing validated findings, add the exact source URL, attribution, lic
 ├── .gitignore
 ├── Data/
 │   └── raw/
-│       └── README.md
+│       ├── README.md
+│       └── ncr_ride_bookings.csv
 ├── Documentation/
 │   ├── Business_Questions.md
 │   ├── DAX_Measures.md
@@ -75,18 +76,17 @@ Before publishing validated findings, add the exact source URL, attribution, lic
     └── Transformation_Guide.md
 ```
 
-The Power BI report, source CSV, a separate data-quality report, and a separate model-architecture file are not currently present in the repository. The guides contain model-design information, but those missing files should not be assumed to exist.
+The editable Power BI report, a separate data-quality report, and a separate model-architecture file are not currently present in the repository. The raw source CSV is present at `Data/raw/ncr_ride_bookings.csv`. The guides contain model-design information, but those missing files should not be assumed to exist.
 
 ## Reproduction status
 
 At present, a new reviewer cannot reproduce the complete analysis from this repository alone. To make the project reproducible:
 
-1. Document the original dataset source and the licence/redistribution conditions.
-2. Add the permitted source data, or provide an explicitly documented alternative and retrieval instructions.
-3. Add the editable Power BI project (preferably the source-controlled PBIP format) or a report file that meets GitHub's file-size limits.
-4. Refresh the model from the documented source and validate the final row counts, status totals, date range, and key fields.
-5. Test the DAX measures in the actual model, including status and date filter behaviour.
-6. Replace provisional figures in the findings register with results recalculated from the source; retain screenshots or exported result tables that substantiate the findings.
+1. Confirm and document the source of the committed CSV plus the licence/redistribution conditions.
+2. Add the editable Power BI project (preferably the source-controlled PBIP format) or a report file that meets GitHub's file-size limits.
+3. Refresh the model from the included CSV and validate the row count, status totals, date range, and key fields.
+4. Test the DAX measures in the actual model, including status and date filter behaviour.
+5. Replace provisional figures in the findings register with results recalculated from the source; retain result tables or screenshots that substantiate the findings.
 
 See [the validation checklist](Documentation/Validation_Checklist.md) for acceptance checks.
 
