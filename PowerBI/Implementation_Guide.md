@@ -1,5 +1,7 @@
 # Power BI Implementation Guide
 
+> **Status:** This is a build guide, not proof of a completed or tested report. The repository does not currently contain the source CSV or the editable PBIX/PBIP report. Row counts, visuals, relationships, refresh times, and KPI outputs below are specifications to verify with the actual data and model.
+
 ## Step-by-Step Instructions to Build the Ride-Booking Analytics Dashboard
 
 This guide walks through building the complete Power BI project from scratch using the provided documentation.
@@ -8,9 +10,9 @@ This guide walks through building the complete Power BI project from scratch usi
 
 ## Prerequisites
 
-- **Power BI Desktop** (October 2024 or later)
+- **Power BI Desktop** (current supported version)
 - **Source Data:** `ncr_ride_bookings.csv` (150,000 rows)
-- **Estimated Time:** 2-3 hours for complete implementation
+- **Estimated Time:** depends on source-data cleanup, model design, and visual validation
 - **Skill Level:** Intermediate Power BI user
 
 ---
@@ -36,10 +38,10 @@ This guide walks through building the complete Power BI project from scratch usi
 - Trim all text columns
 - Create status flags (IsCompleted, IsCancelled)
 
-**Result:** Clean fact table ready for modeling
+**Expected result:** a cleaned fact query, after confirming the source schema and validating each transformation
 
 ### Step 3: Create Dimension Tables
-**Create 6 separate queries in Power Query:**
+**Create six distinct dimension queries in Power Query. The row counts below are expected values from prior notes, not validated counts:**
 
 1. **DimDate** (366 rows) — Full 2024 calendar
 2. **DimVehicle** (7 rows) — Vehicle types with IsShared flag
@@ -62,7 +64,7 @@ This guide walks through building the complete Power BI project from scratch usi
 
 ### Step 5: Close & Apply
 - Click "Close & Apply" in Power Query Editor
-- Wait for data load (30-60 seconds for 150K rows)
+- Wait for the refresh to finish; refresh duration depends on the machine, source, and applied transformations
 
 ---
 
@@ -71,7 +73,7 @@ This guide walks through building the complete Power BI project from scratch usi
 ### Step 6: Create Relationships
 **Switch to Model View** (left sidebar icon)
 
-**Create these 7 relationships:**
+**Create seven relationships across six distinct dimensions. Confirm key uniqueness and referential integrity before relying on these relationships:**
 
 | From (Dimension) | To (Fact) | Type | Direction | Status |
 |-----------------|-----------|------|-----------|--------|
@@ -96,7 +98,7 @@ This guide walks through building the complete Power BI project from scratch usi
 
 ### Step 8: Verify Model
 **Checklist:**
-- [ ] All 7 relationships created
+- [ ] All 7 documented relationships created and validated
 - [ ] No circular dependencies
 - [ ] DimLocation has 2 relationships (one active, one inactive)
 - [ ] DimDate marked as date table
@@ -135,7 +137,7 @@ This guide walks through building the complete Power BI project from scratch usi
 ```dax
 [Total Booking Value] = SUM(FactBookings[BookingValue])
 [Completed Revenue] = CALCULATE([Total Booking Value], DimBookingStatus[IsSuccess] = TRUE)
-[Revenue per KM] = DIVIDE([Completed Revenue], SUM(FactBookings[RideDistance]), 0)
+[Revenue per KM] = DIVIDE([Completed Revenue], [Total Completed Distance], 0)
 ```
 
 **Operations:**
@@ -501,7 +503,7 @@ This guide walks through building the complete Power BI project from scratch usi
 
 ## NEXT STEPS
 
-✅ **Completed Dashboard:**
+**Completion status:** Mark the dashboard complete only after the report file is saved, refreshed, and all validation checks pass.
 - 4 professional pages
 - 20+ DAX measures
 - Star schema data model
