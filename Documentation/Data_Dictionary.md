@@ -1,15 +1,17 @@
 # Data Dictionary
 
+> **Validation status:** This is a schema reference inherited from project documentation. The source CSV is not included, so the stated row counts, distinct counts, completeness rates, examples, and null patterns have not been independently verified. Confirm every field name, type, category, unit, and data-quality statement against the actual source before treating it as authoritative.
+
 ## Overview
-This document defines all fields in the ride-booking analytics dataset and describes the normalized data model structure.
+This document describes the expected source fields and proposed model. Validate the definitions and examples against the actual CSV before use.
 
 ---
 
 ## Source CSV Schema
 
 ### Raw File: `ncr_ride_bookings.csv`
-- **Records:** 150,000 booking transactions
-- **Date Range:** 2024-01-01 to 2024-12-30
+- **Records:** Approximately 150,000 in prior project notes; not verified in this repository
+- **Date Range:** 2024-01-01 to 2024-12-30 in prior notes; not verified in this repository
 - **Format:** CSV with header row
 
 ---
@@ -18,20 +20,20 @@ This document defines all fields in the ride-booking analytics dataset and descr
 
 | Column | Data Type | Business Meaning | Example | Data Quality Notes |
 |--------|-----------|------------------|---------|-------------------|
-| **Date** | Date | Booking date | 2024-03-23 | 100% complete; standardized YYYY-MM-DD |
-| **Time** | Time | Booking time | 12:29:38 | 100% complete; HH:MM:SS format |
-| **Booking ID** | String | Unique booking identifier | CNR5884300 | 100% complete; triple quotes removed during ETL |
-| **Booking Status** | String | Final booking outcome | "Completed", "Cancelled by Driver", "Cancelled by Customer", "No Driver Found", "Incomplete" | 100% complete; 5 distinct values |
-| **Customer ID** | String | Unique customer identifier | CID1982111 | 100% complete; triple quotes removed during ETL |
-| **Vehicle Type** | String | Vehicle category | "Auto", "Go Mini", "Go Sedan", "Bike", "eBike", "Premier Sedan", "Uber XL" | 100% complete; 7 distinct values |
-| **Pickup Location** | String | Ride origin location | "Palam Vihar" | 100% complete; 176 unique locations |
-| **Drop Location** | String | Ride destination location | "Jhilmil" | 100% complete; 176 unique locations |
-| **Avg VTAT** | Decimal | Average Vehicle Time at Arrival (seconds) | 4.9 | Null for cancelled/no-driver bookings (expected) |
+| **Date** | Date | Booking date | 2024-03-23 | Completeness not validated; standardized YYYY-MM-DD |
+| **Time** | Time | Booking time | 12:29:38 | Completeness not validated; HH:MM:SS format |
+| **Booking ID** | String | Unique booking identifier | CNR5884300 | Completeness not validated; triple quotes removed during ETL |
+| **Booking Status** | String | Final booking outcome | "Completed", "Cancelled by Driver", "Cancelled by Customer", "No Driver Found", "Incomplete" | Completeness not validated; 5 distinct values |
+| **Customer ID** | String | Unique customer identifier | CID1982111 | Completeness not validated; triple quotes removed during ETL |
+| **Vehicle Type** | String | Vehicle category | "Auto", "Go Mini", "Go Sedan", "Bike", "eBike", "Premier Sedan", "Uber XL" | Completeness not validated; 7 distinct values |
+| **Pickup Location** | String | Ride origin location | "Palam Vihar" | Completeness not validated; 176 unique locations |
+| **Drop Location** | String | Ride destination location | "Jhilmil" | Completeness not validated; 176 unique locations |
+| **Avg VTAT** | Decimal | Average Vehicle Time at Arrival (seconds) | 4.9 | Null pattern and meaning must be verified from source documentation |
 | **Avg CTAT** | Decimal | Average Customer Time at Arrival / Ride Duration (seconds) | 14.0 | Null for cancelled/no-driver bookings (expected) |
 | **Cancelled Rides by Customer** | Boolean | Flag: Customer cancelled | 0 or 1 | Binary flag; 0 = no, 1 = yes |
-| **Reason for cancelling by Customer** | String | Why customer cancelled | "Driver is not moving towards pickup location" | Null if no customer cancellation |
+| **Reason for cancelling by Customer** | String | Why customer cancelled | "Driver is not moving towards pickup location" | Expected null pattern; verify against source |
 | **Cancelled Rides by Driver** | Boolean | Flag: Driver cancelled | 0 or 1 | Binary flag; 0 = no, 1 = yes |
-| **Driver Cancellation Reason** | String | Why driver cancelled | "Personal & Car related issues" | Null if no driver cancellation |
+| **Driver Cancellation Reason** | String | Why driver cancelled | "Personal & Car related issues" | Expected null pattern; verify against source |
 | **Incomplete Rides** | Boolean | Flag: Ride started but not finished | 0 or 1 | Binary flag; 0 = no, 1 = yes |
 | **Incomplete Rides Reason** | String | Why ride incomplete | "Vehicle Breakdown" | Null if ride completed |
 | **Booking Value** | Decimal | Transaction amount (currency) | 237 | Null for some cancelled/no-driver bookings |
