@@ -1,28 +1,31 @@
 # Source Dataset Notes
 
-## Current repository status
+## File status
 
-The expected file is named `ncr_ride_bookings.csv` and the transformation guide assumes a booking-level CSV with fields such as booking ID, date, time, booking status, vehicle type, locations, booking value, ride distance, wait-time measures, and ratings.
-
-**The CSV is not included in this repository.** The previous documentation describes it as approximately 150,000 rows and 21 columns for the NCR region of India in 2024. Those details have not been independently verified in this review because the source file and a verifiable source URL are unavailable here.
-
-## Before using the data
-
-1. Record the exact source URL, publisher, dataset version/date, and access date.
-2. Confirm attribution and whether the licence permits analysis, publication, and redistribution.
-3. Inspect the real CSV headers and data types before applying the M steps in the transformation guide.
-4. Confirm row count, unique booking IDs, date range, status categories, and missing-value patterns.
-5. Do not assume that a null rating, VTAT, CTAT, or booking value has one specific business meaning without verifying the source documentation.
-6. Do not upload identifiable or confidential records.
-
-## Local file location
-
-If you have a licensed copy of the source file, place it at:
+The source CSV is present in this repository at:
 
 `Data/raw/ncr_ride_bookings.csv`
 
-Update the Power Query source path to match your environment. The path used in the guide is an example, not a working path on every computer.
+The file uploaded to GitHub is approximately 25.5 MB. The project documentation describes the dataset as roughly 150,000 booking records, 21 fields, and bookings in the NCR region of India during 2024. These record, field, and date-range details have not yet been independently verified against the uploaded file.
 
-## Source and licensing limitation
+## Source and attribution
 
-A source URL and dataset redistribution terms are not currently recorded in this repository. Until these are documented, the project should not claim that the data is publicly reusable or that its derived results can be independently reproduced by a reviewer.
+A commonly referenced matching dataset is [Uber Ride Analytics Dashboard — NCR Ride Bookings on Kaggle](https://www.kaggle.com/datasets/yashdevladdha/uber-ride-analytics-dashboard).
+
+**Please confirm that this is the actual source of the committed CSV before treating it as definitive attribution.** Record the source URL, author/publisher, dataset version or access date, and any required attribution. Check the source's licensing and redistribution terms; public download availability does not automatically mean the file may be rehosted or redistributed on GitHub.
+
+## Before using the data
+
+1. Inspect the actual headers and data types before applying the M steps in the transformation guide.
+2. Verify source row count, unique booking IDs, date range, status categories, null patterns, and numeric ranges.
+3. Confirm the source definitions and units for VTAT, CTAT, distance, booking value, and ratings.
+4. Do not treat a missing rating, time metric, or booking value as zero unless the source documentation supports that treatment.
+5. Do not upload confidential or personally identifiable data. If the source licence disallows redistribution, remove the CSV from the public repository and replace it with source/retrieval instructions.
+
+## Local file location
+
+Power Query should point to the CSV on the machine used to refresh the report. Any path shown in the implementation guide is a placeholder and must be updated for the reviewer's local environment.
+
+## Validation status
+
+The CSV upload is confirmed by the repository tree. This does not itself validate the data or prove that the numeric findings in the documentation were recalculated from it. Complete the checks in [the portfolio validation checklist](../../Documentation/Validation_Checklist.md) before presenting the project's findings as verified.
