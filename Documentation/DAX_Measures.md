@@ -1,8 +1,10 @@
 # DAX Measures Reference
 
+> **Validation status:** These are proposed measure definitions. The PBIX/PBIP and source CSV are not included, so formulas have not been executed against the project model. Confirm table names, column names, relationship behaviour, business definitions, and units in Power BI before publishing results.
+
 ## Production-Ready KPI Library for Ride-Booking Analytics
 
-This document provides exact DAX formulas for all measures used in the Power BI dashboard. Copy-paste ready for implementation.
+This document provides DAX templates for the planned measures. They require validation in the actual Power BI model before they can be described as production-ready.
 
 ---
 
@@ -248,13 +250,13 @@ CALCULATE(
 [Revenue per KM] = 
 DIVIDE(
     [Completed Revenue],
-    SUM(FactBookings[RideDistance]),
+    [Total Completed Distance],
     0
 )
 ```
-**Definition:** Completed revenue divided by total completed distance.  
+**Definition:** Completed revenue divided by distance for completed bookings only. The numerator and denominator must represent the same booking population.  
 **Format:** Currency per unit: `$#,##0.00 "/km"`  
-**Filter Context:** Only applies to completed bookings (via [Completed Revenue])
+**Filter Context:** Both numerator and denominator explicitly apply the completed-booking filter through their measure definitions. Other active report filters still apply.
 
 ---
 
@@ -283,7 +285,7 @@ CALCULATE(
     DimBookingStatus[IsSuccess] = TRUE
 )
 ```
-**Definition:** Mean Customer Time at Arrival / Ride Duration for completed rides.  
+**Definition:** Average of the source CTAT field for completed rides. Confirm the source's exact meaning and unit before describing it as ride duration.  
 **Format:** Decimal: `#,##0.0 "sec"` or `#,##0.0 "min"`  
 **Null Handling:** AVERAGE excludes nulls
 
@@ -382,6 +384,8 @@ DIVIDE(
 ---
 
 ## 6. TIME-BASED MEASURES (OPTIONAL)
+
+**Date modelling note:** Mark the calendar table as the model's date table. Sort MonthName by a numeric Month column, and use a Year-Month field (for example, YYYY-MM) for chronological visuals when more than one year is present. Validate every time-intelligence measure against a hand-calculated period.
 
 ### [Previous Month Bookings]
 ```dax
@@ -596,7 +600,7 @@ CALCULATE(
 
 ## TESTING CHECKLIST
 
-Before deploying measures to production dashboards:
+Before describing these measures as validated or using them in a portfolio finding:
 
 ✅ **Calculation Accuracy**
 - [ ] Completion Rate = Completed / Total (test with sample)
