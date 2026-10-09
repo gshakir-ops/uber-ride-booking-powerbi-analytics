@@ -22,7 +22,7 @@ This document provides step-by-step Power Query (M code) transformations to clea
 ```m
 let
     Source = Csv.Document(
-        File.Contents("C:\Data\ncr_ride_bookings.csv"),
+        File.Contents("C:\\path\\to\\ncr_ride_bookings.csv"),
         [Delimiter=",", Columns=21, Encoding=65001, QuoteStyle=QuoteStyle.Csv]
     ),
     PromotedHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
