@@ -1,5 +1,7 @@
 # Power Query Transformation Guide
 
+> **Validation status:** These are proposed M transformations, not an executed ETL pipeline. The source CSV is not in this repository. Confirm actual column names, types, quoting, null patterns, category labels, and row counts before using this code or publishing any result.
+
 ## Complete ETL Process for Ride-Booking Analytics
 
 This document provides step-by-step Power Query (M code) transformations to clean and prepare the ride-booking dataset for analysis.
@@ -8,7 +10,7 @@ This document provides step-by-step Power Query (M code) transformations to clea
 
 ## Overview
 
-**Source:** `ncr_ride_bookings.csv` (150,000 rows, 21 columns)  
+**Source:** `ncr_ride_bookings.csv` (prior notes describe approximately 150,000 rows and 21 columns; not verified here)  
 **Target:** Clean fact table + dimension tables in star schema  
 **Tool:** Power BI Power Query Editor
 
@@ -28,7 +30,7 @@ in
     PromotedHeaders
 ```
 
-**Result:** 150,000 rows loaded with column headers
+**Validation:** Compare the loaded row count to the actual source file and record the result; 150,000 is an unverified figure from prior notes.
 
 ---
 
@@ -249,7 +251,7 @@ let
 in
     #"Added IsWeekend"
 ```
-**Result:** 366 rows (full 2024 calendar year)
+**Expected result:** 366 rows for a full 2024 calendar. Confirm this date range matches the source before using it.
 
 **Mark as Date Table in Power BI:**
 1. Select DimDate table
@@ -273,7 +275,7 @@ let
 in
     #"Added IsShared"
 ```
-**Result:** 7 rows (Auto, Bike, eBike, Go Mini, Go Sedan, Premier Sedan, Uber XL)
+**Expected result from prior notes:** 7 vehicle categories. Recalculate from the source; do not hardcode this count as a validated result.
 
 ---
 
@@ -293,7 +295,7 @@ let
 in
     #"Added IsDigital"
 ```
-**Result:** 6 rows (UPI, Cash, Debit Card, Credit Card, Uber Wallet, Other)
+**Expected result from prior notes:** 6 payment categories. Recalculate from the source; do not hardcode this count as a validated result.
 
 ---
 
@@ -319,7 +321,7 @@ let
 in
     Source
 ```
-**Result:** 5 rows with business logic
+**Expected result:** 5 status categories only if the source has these exact mutually exclusive labels. Verify status values and mappings.
 
 ---
 
@@ -337,7 +339,7 @@ let
 in
     #"Reordered Columns"
 ```
-**Result:** 176 unique location names
+**Expected result from prior notes:** 176 unique location names. Recalculate after normalising text and handling blanks.
 
 ---
 
@@ -351,7 +353,7 @@ let
 in
     #"Renamed Column"
 ```
-**Result:** 148,788 unique customer IDs
+**Expected result from prior notes:** 148,788 unique customer IDs. Recalculate from nonblank customer IDs.
 
 ---
 
@@ -504,7 +506,7 @@ in
 
 After completing all transformations:
 
-✅ **Row Count Validation**
+**Row-count checks (expected values are unverified until run on the actual CSV)**
 - [ ] FactBookings: 150,000 rows (same as source)
 - [ ] DimDate: 366 rows (2024 calendar)
 - [ ] DimVehicle: 7 rows
@@ -572,5 +574,5 @@ After completing all transformations:
 
 **Version:** 1.0  
 **Last Updated:** October 8, 2024  
-**Tested On:** Power BI Desktop (October 2024 release)  
-**Estimated Transformation Time:** 5-10 minutes
+**Test status:** not independently executed against a source CSV in this repository  
+**Transformation status:** proposed steps; run and validate against the actual source before using the results
